@@ -1,5 +1,16 @@
+import dao.KategoriDAO;
+import db.DatabaseInitializer;
+import model.Kategori;
+
 public class Main {
     public static void main(String[] args) {
+
+        KategoriDAO kategoriDAO = new KategoriDAO();
+
+        Kategori kategori = new Kategori("Gıda");
+        kategoriDAO.add(kategori);
+
+        DatabaseInitializer.init();
         dao.UrunDAO urunDAO = new dao.UrunDAO();
         model.Urun urun = factory.GidaFabrikasi.gidaOlustur("ET");
 

@@ -10,7 +10,7 @@ public class DBConnection {
     private static final String USER = "postgres";
     private static final String PASSWORD = "1234";
 
-    private DBConnection() {}
+    private DBConnection() {} // nesne oluşturulmasını engeller
 
     public static Connection getConnection() {
         try {

@@ -10,15 +10,11 @@ public class DBConnection {
     private static final String USER = "postgres";
     private static final String PASSWORD = "1234";
 
-    private static Connection connection;
+    private DBConnection() {}
 
     public static Connection getConnection() {
         try {
-            if (connection == null || connection.isClosed()) {
-                connection = DriverManager.getConnection(URL, USER, PASSWORD);
-                System.out.println("DB bağlantısı başarılı");
-            }
-            return connection;
+            return DriverManager.getConnection(URL, USER, PASSWORD);
         } catch (SQLException e) {
             throw new RuntimeException("DB bağlantısı başarısız", e);
         }

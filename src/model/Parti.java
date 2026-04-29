@@ -6,6 +6,7 @@ public class Parti {
 
     private int partiId;
     private int urunId;  // FK
+    private int depoId;  // FK
 
     private int toplamMiktar;
     private int kalanMiktar;
@@ -14,16 +15,18 @@ public class Parti {
 
     public Parti() {}
 
-    public Parti(int partiId, int urunId, int toplamMiktar, int kalanMiktar, Date sonKullanmaTarihi) {
+    public Parti(int partiId, int urunId, int depoId, int kalanMiktar, Date sonKullanmaTarihi) {
         this.partiId = partiId;
         this.urunId = urunId;
-        this.toplamMiktar = toplamMiktar;
+        this.depoId = depoId;
+        this.toplamMiktar = kalanMiktar;
         this.kalanMiktar = kalanMiktar;
         this.sonKullanmaTarihi = sonKullanmaTarihi;
     }
 
-    public Parti(int urunId, int toplamMiktar, Date sonKullanmaTarihi) {
+    public Parti(int urunId, int depoId, int toplamMiktar, Date sonKullanmaTarihi) {
         this.urunId = urunId;
+        this.depoId = depoId;
         this.toplamMiktar = toplamMiktar;
         this.kalanMiktar = toplamMiktar;
         this.sonKullanmaTarihi = sonKullanmaTarihi;
@@ -35,6 +38,10 @@ public class Parti {
 
     public int getUrunId() {
         return urunId;
+    }
+
+    public int getDepoId() {
+        return depoId;
     }
 
     public int getToplamMiktar() {
@@ -57,6 +64,10 @@ public class Parti {
         this.urunId = urunId;
     }
 
+    public void setDepoId(int depoId) {
+        this.depoId = depoId;
+    }
+
     public void setToplamMiktar(int toplamMiktar) {
         this.toplamMiktar = toplamMiktar;
     }
@@ -74,6 +85,7 @@ public class Parti {
         return "Parti{" +
                 "partiId=" + partiId +
                 ", urunId=" + urunId +
+                ", depoId=" + depoId +
                 ", toplamMiktar=" + toplamMiktar +
                 ", kalanMiktar=" + kalanMiktar +
                 ", sonKullanmaTarihi=" + sonKullanmaTarihi +

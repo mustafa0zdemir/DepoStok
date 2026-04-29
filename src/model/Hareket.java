@@ -7,28 +7,31 @@ public class Hareket {
     private int hareketId;
     private Date tarih;
 
+    private int partiId;
     private int personelId;
-    private int depoId;
+    private int subeId;
     private int miktar;
     private String tip; // giriş / çıkış
 
     public Hareket() {}
 
-    public Hareket(int hareketId, Date tarih, int personelId, int depoId, int miktar, String tip) {
+    public Hareket(int hareketId, int partiId, int personelId, int subeId, int miktar, String tip, Date tarih) {
         this.hareketId = hareketId;
-        this.tarih = tarih;
+        this.partiId = partiId;
         this.personelId = personelId;
-        this.depoId = depoId;
+        this.subeId = subeId;
         this.miktar = miktar;
         this.tip = tip;
+        this.tarih = tarih;
     }
 
-    public Hareket(Date tarih, int personelId, int depoId, int miktar, String tip) {
-        this.tarih = tarih;
+    public Hareket(int partiId, int personelId, int subeId, int miktar, String tip, Date tarih) {
+        this.partiId = partiId;
         this.personelId = personelId;
-        this.depoId = depoId;
+        this.subeId = subeId;
         this.miktar = miktar;
         this.tip = tip;
+        this.tarih = tarih;
     }
 
     public int getHareketId() {
@@ -55,12 +58,20 @@ public class Hareket {
         this.personelId = personelId;
     }
 
-    public int getDepoId() {
-        return depoId;
+    public int getPartiId() {
+        return partiId;
     }
 
-    public void setDepoId(int depoId) {
-        this.depoId = depoId;
+    public void setPartiId(int partiId) {
+        this.partiId = partiId;
+    }
+
+    public int getSubeId() {
+        return subeId;
+    }
+
+    public void setSubeId(int subeId) {
+        this.subeId = subeId;
     }
 
     public int getMiktar() {
@@ -83,11 +94,12 @@ public class Hareket {
     public String toString() {
         return "Hareket{" +
                 "hareketId=" + hareketId +
-                ", tarih=" + tarih +
+                ", partiId=" + partiId +
                 ", personelId=" + personelId +
-                ", depoId=" + depoId +
+                ", subeId=" + subeId +
                 ", miktar=" + miktar +
                 ", tip='" + tip + '\'' +
+                ", tarih=" + tarih +
                 '}';
     }
 }

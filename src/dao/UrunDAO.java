@@ -12,7 +12,6 @@ import java.util.List;
 
 public class UrunDAO {
 
-
     // Ürün ekleme
     public void add(Urun urun) {
         String sql = "INSERT INTO urun (urun_adi, birim_fiyat, kategori_id) VALUES (?, ?, ?)";
@@ -27,11 +26,11 @@ public class UrunDAO {
             ps.executeUpdate();
 
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Ürün eklenemedi", e);
         }
     }
 
-    //Ürün listeleme
+    // Ürün listeleme
     public List<Urun> getAll() {
         List<Urun> urunList = new ArrayList<>();
         String sql = "SELECT * FROM urun";
@@ -57,7 +56,7 @@ public class UrunDAO {
         return urunList;
     }
 
-    // id ile listeleme
+    // id ile getirme
     public Urun getById(int id) {
         String sql = "SELECT * FROM urun WHERE urun_id = ?";
 
@@ -78,13 +77,13 @@ public class UrunDAO {
             }
 
         } catch (SQLException e) {
-            throw new RuntimeException("Ürün bulunamadı", e);
+            throw new RuntimeException("Ürün getirilemedi: " + id, e);
         }
 
-        return null;
+        throw new RuntimeException("Ürün bulunamadı: " + id);
     }
 
-    //Ürün güncelleme
+    // Ürün güncelleme
     public void update(Urun urun) {
         String sql = "UPDATE urun SET urun_adi = ?, birim_fiyat = ?, kategori_id = ? WHERE urun_id = ?";
 
@@ -99,7 +98,7 @@ public class UrunDAO {
             ps.executeUpdate();
 
         } catch (SQLException e) {
-            throw new RuntimeException("Ürün güncellenemedi", e);
+            throw new RuntimeException("Ürün güncellenemedi: " + urun.getUrunId(), e);
         }
     }
 
@@ -114,14 +113,7 @@ public class UrunDAO {
             ps.executeUpdate();
 
         } catch (SQLException e) {
-            throw new RuntimeException("Ürün silinemedi", e);
+            throw new RuntimeException("Ürün silinemedi: " + id, e);
         }
     }
-
-
-
-
-
-
-
 }

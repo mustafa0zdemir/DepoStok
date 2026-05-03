@@ -137,4 +137,67 @@ public class PartiDAO {
             throw new RuntimeException("Stok düşürülemedi (parti): " + partiId, e);
         }
     }
+
+    // Kritik: stok artırma işlemi
+    public void increaseStock(int partiId, int miktar) {
+        String sql = "UPDATE parti SET kalan_miktar = kalan_miktar + ? WHERE parti_id = ?";
+
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setInt(1, miktar);
+            ps.setInt(2, partiId);
+
+            ps.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Stok artirılamadi (parti): " + partiId, e);
+        }
+    }
+
+    public int getLatestPartiIdByUrunId(int urunId) {
+        String sql = "SELECT parti_id FROM parti WHERE urun_id = ? ORDER BY parti_id DESC LIMIT 1";
+
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setInt(1, urunId);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("parti_id");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Parti bulunamadi (urun): " + urunId, e);
+        }
+
+        throw new RuntimeException("Parti bulunamadi (urun): " + urunId);
+    }
+
+    public void increaseStockByUrunId(int urunId, int miktar) {
+        int partiId = getLatestPartiIdByUrunId(urunId);
+        increaseStock(partiId, miktar);
+    }
+
+    public Parti getLatestPartiByUrunIdOrNull(int urunId) {
+        String sql = "SELECT * FROM parti WHERE urun_id = ? ORDER BY parti_id DESC LIMIT 1";
+
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setInt(1, urunId);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return new Parti(
+                        rs.getInt("parti_id"),
+                        rs.getInt("urun_id"),
+                        rs.getInt("depo_id"),
+                        rs.getInt("kalan_miktar"),
+                        rs.getDate("son_kullanma_tarihi")
+                );
+            }
+            return null;
+        } catch (SQLException e) {
+            throw new RuntimeException("Parti getirilemedi (urun): " + urunId, e);
+        }
+    }
 }

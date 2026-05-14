@@ -49,7 +49,7 @@ public class TestFactoryMethodSimple {
         personelService.addPersonel("Ahmet", "Yagli", "05551112245");
 
         int subeId = getLastSubeId(subeService);
-        int personelIdMetot = getLastPersonelId(personelService);
+        int personelIdMetot = getLastPersonelId(personelService);git
         int personelIdManuel = 2;
 
 

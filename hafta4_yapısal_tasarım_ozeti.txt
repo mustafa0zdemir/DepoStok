@@ -1,0 +1,2 @@
+Yapısal Tasarım Kalıbı: Facade uygulanmıştır
+Özellik 2: Stok Hareket Yönetimi tamamlanmıştır
